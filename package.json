@@ -1,0 +1,38 @@
+{
+  "name": "cameraserver",
+  "version": "0.3.0",
+  "description": "CameraServer is a plugin providing Live Camera Pictures (JPEG) over HTTP",
+  "cordova": {
+    "id": "cordova-plugin-cameraserver",
+    "platforms": [
+
+      "android",
+  
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moonware/cordova-cameraserver"
+  },
+
+  "keywords": [
+    "cordova",
+    "camera",
+    "camera server"
+  ],
+
+  "author": "Apache Software Foundation",
+  "license": "Apache-2.0",
+  "engines": {
+    "cordovaDependencies": {
+      "2.0.0": {
+        "cordova": ">100"
+      }
+    }
+  },
+  "devDependencies": {
+
+    "cordova-plugin-whitelist": "^1.3.1"
+  }
+}
