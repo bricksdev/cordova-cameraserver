@@ -313,7 +313,14 @@ public class CameraServer extends CordovaPlugin {
         Log.w(LOGTAG, "startCamera");
 
          // initialize the camera manager :)
-         CameraManager.init(cordova.getActivity().getApplicationContext());
+        String cameraDirect = null;
+       
+        JSONObject options = inputs.optJSONObject(0);
+        if(options != null) {
+            cameraDirect = options.optString("direction");
+        };
+    
+         CameraManager.init(cordova.getActivity().getApplicationContext(),cameraDirect);
          startCapture();
 
          callbackContext.success();

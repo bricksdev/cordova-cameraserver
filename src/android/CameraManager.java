@@ -34,7 +34,7 @@ public final class CameraManager {
 	public Camera camera;
 	private boolean initialized;
 	public boolean previewing;
-	private string defaultCamera = "front";
+	private String defaultCamera = "front";
 	private int defaultCameraId = 0;
 
 	private SurfaceTexture surfaceTexture;
@@ -115,7 +115,7 @@ public final class CameraManager {
 			camera.setPreviewDisplay(null);
 			
 			if (android.os.Build.VERSION.SDK_INT >= 9) {
-				setCameraDisplayOrientation(0, camera);
+				setCameraDisplayOrientation(defaultCameraId, camera);
 			} 			
 									
 			if (surfaceTexture != null){
@@ -322,9 +322,11 @@ public final class CameraManager {
 			int targetRotation = 0;
 			
 			if (android.os.Build.VERSION.SDK_INT >= 9) {
-				targetRotation = getDisplayOrientation(0);
+				targetRotation = getDisplayOrientation(defaultCameraId);
 			} 		
-			
+			if(defaultCamera.equals("front")){// mirror image
+				targetRotation += 180;
+			}
 			previewCallback.setRotation(targetRotation);
 			
 			if (DEBUG) Log.i(TAG, "Setting Standard Callback");			
