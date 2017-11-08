@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bricksdev/cordova-cameraserver"
+    "url": "git://github.com/bricksdev/cordova-cameraserver"
   },
 
   "keywords": [
