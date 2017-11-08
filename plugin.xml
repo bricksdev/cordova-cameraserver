@@ -10,8 +10,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 <author>Steve Niquille</author>
 <license>MIT</license>
 <keywords>camera,server,http,web,jpeg,ios,android</keywords>
-<repo>https://github.com/moonware/phonegap-cameraserver</repo>
-<issue>https://github.com/moonware/phonegap-cameraserver</issue>
+
 
 <engines>
     <engine name="cordova" version=">=2.9" />

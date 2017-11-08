@@ -41,8 +41,8 @@ cameraserver_exports.getNumRequests = function(success, error) {
 	exec(success, error, "CameraServer", "getNumRequests", []);
 };
 
-cameraserver_exports.startCamera = function(success, error) {
-	exec(success, error, "CameraServer", "startCamera", []);
+cameraserver_exports.startCamera = function(options,success, error) {
+	exec(success, error, "CameraServer", "startCamera", [options]);
 };
 
 cameraserver_exports.stopCamera = function(success, error) {

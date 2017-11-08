@@ -34,6 +34,8 @@ public final class CameraManager {
 	public Camera camera;
 	private boolean initialized;
 	public boolean previewing;
+	private string defaultCamera = "front";
+	private int defaultCameraId = 0;
 
 	private SurfaceTexture surfaceTexture;
 
@@ -66,10 +68,11 @@ public final class CameraManager {
 	
 	public final PreviewCallback previewCallback;
 
-	public static void init(Context context) {
+	public static void init(Context context,String cameraDirect) {
 		if (cameraManager == null) {
-			cameraManager = new CameraManager(context);
+			cameraManager = new CameraManager(context,cameraDirect);
 		}
+
 	}
 
 	public static CameraManager get() {
@@ -80,12 +83,15 @@ public final class CameraManager {
 		return cameraManager.previewCallback.getLastFrame();
 	}
 
-	private CameraManager(Context context) {
+	private CameraManager(Context context,String cameraDirect) {
 
 		Log.i(TAG, "Creating instance of CameraManager...");
 		
 		this.surfaceTexture = new SurfaceTexture(10);
-		
+		if(cameraDirect != null && !cameraDirect.isEmpty()){
+			defaultCamera = cameraDirect;
+		}
+		setDefaultCameraId();// set default camera id
 		this.context = context;
 		this.configManager = new CameraConfigurationManager(context);
 				
@@ -96,15 +102,12 @@ public final class CameraManager {
 		
 		if (camera == null) {
 			if (DEBUG) Log.i(TAG, "Camera opening...");
-			camera = Camera.open();
+			camera = Camera.open(defaultCameraId);
 			if (camera == null) {
-				if (DEBUG) Log.i(TAG, "First camera open failed");
-				camera = Camera.open(0);
 				
-				if (camera == null){
-					if (DEBUG) Log.i(TAG, "Second camera open failed");
-					throw new IOException();
-				}
+				if (DEBUG) Log.i(TAG, "camera open failed");
+				throw new IOException();
+				
 			}
 			
 			if (DEBUG) Log.i(TAG, "Camera open success");
@@ -410,6 +413,22 @@ public final class CameraManager {
 		bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
 		return bitmap;
 	}
+	  private void setDefaultCameraId(){
+	    // Find the total number of cameras available
+	    int numberOfCameras = Camera.getNumberOfCameras();
+
+	    int facing = defaultCamera.equals("front") ? Camera.CameraInfo.CAMERA_FACING_FRONT : Camera.CameraInfo.CAMERA_FACING_BACK;
+
+	    // Find the ID of the default camera
+	    Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
+	    for (int i = 0; i < numberOfCameras; i++) {
+	      Camera.getCameraInfo(i, cameraInfo);
+	      if (cameraInfo.facing == facing) {
+	        defaultCameraId = i;
+	        break;
+	      }
+	    }
+  	}
 }
 
 final class CameraConfigurationManager {
