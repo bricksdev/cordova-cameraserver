@@ -10,6 +10,8 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 <author>Steve Niquille</author>
 <license>MIT</license>
 <keywords>camera,server,http,web,jpeg,ios,android</keywords>
+<repo>https://github.com/bricksdev/cordova-cameraserver</repo>
+<issue>https://github.com/bricksdev/cordova-cameraserver</issue>
 
 
 <engines>
