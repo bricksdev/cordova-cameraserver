@@ -99,7 +99,8 @@ public class CameraServer extends CordovaPlugin {
             result = getNumRequests(inputs, callbackContext);
 
         } else if (ACTION_START_CAMERA.equals(action)) {
-            result = startCamera(inputs, callbackContext);
+            // for ios plugin define
+            result = startCamera(args.getInt(0), callbackContext);
 
         } else if (ACTION_STOP_CAMERA.equals(action)) {
             result = stopCamera(inputs, callbackContext);
@@ -309,16 +310,16 @@ public class CameraServer extends CordovaPlugin {
     
 
 
-    private PluginResult startCamera(JSONArray inputs, CallbackContext callbackContext) {
+    private PluginResult startCamera(int direction, CallbackContext callbackContext) {
         Log.w(LOGTAG, "startCamera");
 
          // initialize the camera manager :)
-        String cameraDirect = null;
-       
-        JSONObject options = inputs.optJSONObject(0);
-        if(options != null) {
-            cameraDirect = options.optString("direction");
-        };
+        String cameraDirect = (direction == 2)?"front":"back";
+       // remove config options for ios plugin
+        //JSONObject options = inputs.optJSONObject(0);
+        //if(options != null) {
+        //    cameraDirect = options.optString("direction");
+        //};
     
          CameraManager.init(cordova.getActivity().getApplicationContext(),cameraDirect);
          startCapture();

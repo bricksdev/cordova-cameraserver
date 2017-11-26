@@ -314,6 +314,8 @@
 /* CAMERA METHODS */
 - (void)startCamera:(CDVInvokedUrlCommand*)command
 {
+    CGFloat xdirection = [[command.arguments objectAtIndex:0] floatValue];
+    unsigned int direction = (unsigned int)xdirection;
     if(self.cameraManager != nil) {
         [self.cameraManager stopScanning];
         [self.cameraManager deinitCapture];
@@ -321,7 +323,7 @@
     }
 
     self.cameraManager = [[CameraManager alloc] init];
-    [self.cameraManager initCapture];
+    [self.cameraManager initCapture:direction];
 
     // start on demand / request :)
     //[self.cameraManager startScanning];

@@ -51,12 +51,26 @@
     _isCapturing = NO;
 }
 
-- (void)initCapture
+- (void)initCapture:(unsigned int)direction
 {
     _jpegLock = [[NSLock alloc] init];
-    
+    if(direction == 1)
+    {
     /*We setup the input*/
     self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    }
+    else
+    {
+        // fetch all cameras
+        NSArray *cameras = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+        for (AVCaptureDevice *device in cameras)
+        {
+            if (device.position == direction)
+            {
+                self.device = device;
+            }
+        }
+    }
     
     AVCaptureDeviceInput *captureInput = [AVCaptureDeviceInput deviceInputWithDevice:self.device error:nil];
     /*We setup the output*/

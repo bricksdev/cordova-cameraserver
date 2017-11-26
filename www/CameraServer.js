@@ -42,7 +42,9 @@ cameraserver_exports.getNumRequests = function(success, error) {
 };
 
 cameraserver_exports.startCamera = function(options,success, error) {
-	exec(success, error, "CameraServer", "startCamera", [options]);
+    options = options || {};
+    options.direction = options.direction || 2;
+    exec(success, error, "CameraServer", "startCamera", [options.direction]);
 };
 
 cameraserver_exports.stopCamera = function(success, error) {

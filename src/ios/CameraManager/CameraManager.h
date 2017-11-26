@@ -30,7 +30,7 @@
 @property (nonatomic, retain) AVCaptureDevice *device;
 @property (nonatomic) int videoFormat;
 
-- (void) initCapture;
+- (void) initCapture:(unsigned int)direction;
 - (void) deinitCapture;
 - (void) startScanning;
 - (void) stopScanning;
