@@ -100,7 +100,7 @@ public class CameraServer extends CordovaPlugin {
 
         } else if (ACTION_START_CAMERA.equals(action)) {
             // for ios plugin define
-            result = startCamera(args.getInt(0), callbackContext);
+            result = startCamera(inputs.getInt(0), callbackContext);
 
         } else if (ACTION_STOP_CAMERA.equals(action)) {
             result = stopCamera(inputs, callbackContext);
